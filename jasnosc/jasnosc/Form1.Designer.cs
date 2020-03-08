@@ -34,6 +34,7 @@
             this.jasnosc = new System.Windows.Forms.Button();
             this.Bar = new System.Windows.Forms.TrackBar();
             this.Label = new System.Windows.Forms.Label();
+            this.Zapis = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.obrazek)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bar)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +52,7 @@
             // 
             this.Wstaw.Location = new System.Drawing.Point(41, 347);
             this.Wstaw.Name = "Wstaw";
-            this.Wstaw.Size = new System.Drawing.Size(75, 23);
+            this.Wstaw.Size = new System.Drawing.Size(75, 45);
             this.Wstaw.TabIndex = 1;
             this.Wstaw.Text = "Wstaw";
             this.Wstaw.UseVisualStyleBackColor = true;
@@ -61,7 +62,7 @@
             // 
             this.jasnosc.Location = new System.Drawing.Point(131, 347);
             this.jasnosc.Name = "jasnosc";
-            this.jasnosc.Size = new System.Drawing.Size(75, 23);
+            this.jasnosc.Size = new System.Drawing.Size(75, 45);
             this.jasnosc.TabIndex = 2;
             this.jasnosc.Text = "Jasność";
             this.jasnosc.UseVisualStyleBackColor = true;
@@ -69,27 +70,42 @@
             // 
             // Bar
             // 
+            this.Bar.LargeChange = 50;
             this.Bar.Location = new System.Drawing.Point(212, 347);
-            this.Bar.Maximum = 100;
+            this.Bar.Maximum = 250;
+            this.Bar.Minimum = -250;
             this.Bar.Name = "Bar";
-            this.Bar.Size = new System.Drawing.Size(442, 45);
+            this.Bar.Size = new System.Drawing.Size(501, 45);
             this.Bar.TabIndex = 3;
+            this.Bar.TickFrequency = 25;
             this.Bar.Scroll += new System.EventHandler(this.Bar_Scroll);
             // 
             // Label
             // 
             this.Label.AutoSize = true;
-            this.Label.Location = new System.Drawing.Point(660, 352);
+            this.Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Label.Location = new System.Drawing.Point(719, 355);
             this.Label.Name = "Label";
-            this.Label.Size = new System.Drawing.Size(13, 13);
+            this.Label.Size = new System.Drawing.Size(20, 24);
             this.Label.TabIndex = 4;
             this.Label.Text = "0";
+            // 
+            // Zapis
+            // 
+            this.Zapis.Location = new System.Drawing.Point(41, 398);
+            this.Zapis.Name = "Zapis";
+            this.Zapis.Size = new System.Drawing.Size(75, 40);
+            this.Zapis.TabIndex = 5;
+            this.Zapis.Text = "Zapis";
+            this.Zapis.UseVisualStyleBackColor = true;
+            this.Zapis.Click += new System.EventHandler(this.Zapis_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Zapis);
             this.Controls.Add(this.Label);
             this.Controls.Add(this.Bar);
             this.Controls.Add(this.jasnosc);
@@ -112,6 +128,7 @@
         private System.Windows.Forms.Button jasnosc;
         private System.Windows.Forms.TrackBar Bar;
         private System.Windows.Forms.Label Label;
+        private System.Windows.Forms.Button Zapis;
     }
 }
 

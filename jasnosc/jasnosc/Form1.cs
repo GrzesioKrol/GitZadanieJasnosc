@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,6 +23,7 @@ namespace jasnosc
         Bitmap bm;
         float progress;
         float b;
+        int aaa;
         
 
         private void Wstaw_Click(object sender, EventArgs e)
@@ -44,7 +46,11 @@ namespace jasnosc
         }     
         private void jasnosc_Click(object sender, EventArgs e)
         {
+            
             bw.RunWorkerAsync();
+            
+            
+
         }
 
         private void Zapis_Click(object sender, EventArgs e)
@@ -59,6 +65,7 @@ namespace jasnosc
 
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
+
             b = (float)progress / 255.0f;
             ColorMatrix cm = new ColorMatrix(new float[][]
                 {
@@ -81,25 +88,33 @@ namespace jasnosc
             using (Graphics gr = Graphics.FromImage(bm))
             {
                 gr.DrawImage(image, points, rect,
-                    GraphicsUnit.Pixel, attributes);
+                GraphicsUnit.Pixel, attributes);
             }
-            
-            
+            for (int i = 0; i < 11; i++)
+            {
+                if (bw.CancellationPending)
+                {
+                    e.Cancel = true;
+                }
+                else
+                {
+                    Thread.Sleep(100);
+                    bw.ReportProgress(i*10);                                       
+                }
+            }
         }
-
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
+            progressBar.Value = e.ProgressPercentage;           
         }
 
         private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             obrazek.Image = bm;
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void anuluj_Click(object sender, EventArgs e)
         {
-         
+            bw.CancelAsync();
         }
     }
 }

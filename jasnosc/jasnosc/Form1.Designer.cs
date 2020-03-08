@@ -35,7 +35,8 @@
             this.Bar = new System.Windows.Forms.TrackBar();
             this.Label = new System.Windows.Forms.Label();
             this.Zapis = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.anuluj = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.obrazek)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bar)).BeginInit();
             this.SuspendLayout();
@@ -61,6 +62,8 @@
             // 
             // bw
             // 
+            this.bw.WorkerReportsProgress = true;
+            this.bw.WorkerSupportsCancellation = true;
             this.bw.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_DoWork);
             this.bw.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_ProgressChanged);
             this.bw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_RunWorkerCompleted);
@@ -107,22 +110,30 @@
             this.Zapis.UseVisualStyleBackColor = true;
             this.Zapis.Click += new System.EventHandler(this.Zapis_Click);
             // 
-            // button1
+            // progressBar
             // 
-            this.button1.Location = new System.Drawing.Point(131, 398);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 40);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.progressBar.Location = new System.Drawing.Point(212, 398);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(501, 23);
+            this.progressBar.TabIndex = 6;
+            // 
+            // anuluj
+            // 
+            this.anuluj.Location = new System.Drawing.Point(131, 399);
+            this.anuluj.Name = "anuluj";
+            this.anuluj.Size = new System.Drawing.Size(75, 39);
+            this.anuluj.TabIndex = 7;
+            this.anuluj.Text = "Anuluj";
+            this.anuluj.UseVisualStyleBackColor = true;
+            this.anuluj.Click += new System.EventHandler(this.anuluj_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.anuluj);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.Zapis);
             this.Controls.Add(this.Label);
             this.Controls.Add(this.Bar);
@@ -147,7 +158,8 @@
         private System.Windows.Forms.TrackBar Bar;
         private System.Windows.Forms.Label Label;
         private System.Windows.Forms.Button Zapis;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Button anuluj;
     }
 }
 

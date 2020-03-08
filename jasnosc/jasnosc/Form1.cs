@@ -20,6 +20,9 @@ namespace jasnosc
 
         Image image;
         Bitmap bm;
+        float progress;
+        float b;
+        
 
         private void Wstaw_Click(object sender, EventArgs e)
         {
@@ -30,15 +33,33 @@ namespace jasnosc
                 obrazek.Image = new Bitmap(op.FileName);
             }
             image = obrazek.Image;
+            
+            
         }
 
         private void Bar_Scroll(object sender, EventArgs e)
         {
             Label.Text = Bar.Value.ToString();
+            progress = Bar.Value;
         }     
         private void jasnosc_Click(object sender, EventArgs e)
-        {            
-            float b = (float)Bar.Value / 255.0f;
+        {
+            bw.RunWorkerAsync();
+        }
+
+        private void Zapis_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                string sciezka= fbd.SelectedPath + "/obrazek.png";
+                bm.Save(sciezka);
+            }
+        }
+
+        private void bw_DoWork(object sender, DoWorkEventArgs e)
+        {
+            b = (float)progress / 255.0f;
             ColorMatrix cm = new ColorMatrix(new float[][]
                 {
                 new float[] {1, 0, 0, 0, 0},
@@ -61,18 +82,24 @@ namespace jasnosc
             {
                 gr.DrawImage(image, points, rect,
                     GraphicsUnit.Pixel, attributes);
-            }           
-            obrazek.Image = bm;           
+            }
+            
+            
         }
 
-        private void Zapis_Click(object sender, EventArgs e)
+        private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            if (fbd.ShowDialog() == DialogResult.OK)
-            {
-                string sciezka= fbd.SelectedPath + "/obrazek.png";
-                bm.Save(sciezka);
-            }
+
+        }
+
+        private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            obrazek.Image = bm;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+         
         }
     }
 }

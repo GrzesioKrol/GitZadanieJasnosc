@@ -30,11 +30,12 @@
         {
             this.obrazek = new System.Windows.Forms.PictureBox();
             this.Wstaw = new System.Windows.Forms.Button();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.bw = new System.ComponentModel.BackgroundWorker();
             this.jasnosc = new System.Windows.Forms.Button();
             this.Bar = new System.Windows.Forms.TrackBar();
             this.Label = new System.Windows.Forms.Label();
             this.Zapis = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.obrazek)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bar)).BeginInit();
             this.SuspendLayout();
@@ -57,6 +58,12 @@
             this.Wstaw.Text = "Wstaw";
             this.Wstaw.UseVisualStyleBackColor = true;
             this.Wstaw.Click += new System.EventHandler(this.Wstaw_Click);
+            // 
+            // bw
+            // 
+            this.bw.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_DoWork);
+            this.bw.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_ProgressChanged);
+            this.bw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_RunWorkerCompleted);
             // 
             // jasnosc
             // 
@@ -100,11 +107,22 @@
             this.Zapis.UseVisualStyleBackColor = true;
             this.Zapis.Click += new System.EventHandler(this.Zapis_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(131, 398);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 40);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.Zapis);
             this.Controls.Add(this.Label);
             this.Controls.Add(this.Bar);
@@ -124,11 +142,12 @@
 
         private System.Windows.Forms.PictureBox obrazek;
         private System.Windows.Forms.Button Wstaw;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.ComponentModel.BackgroundWorker bw;
         private System.Windows.Forms.Button jasnosc;
         private System.Windows.Forms.TrackBar Bar;
         private System.Windows.Forms.Label Label;
         private System.Windows.Forms.Button Zapis;
+        private System.Windows.Forms.Button button1;
     }
 }
 

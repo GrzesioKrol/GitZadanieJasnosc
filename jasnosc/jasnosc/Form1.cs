@@ -23,20 +23,16 @@ namespace jasnosc
         Bitmap bm;
         float progress;
         float b;
-        int aaa;
-        
-
+        Color color;
         private void Wstaw_Click(object sender, EventArgs e)
         {
             OpenFileDialog op = new OpenFileDialog();
-            op.Filter = "Image Files(*.png; *.jpeg;)|*.png; *.jpeg;";
+            op.Filter = "Image Files(*.png; *.jpg;)|*.png; *.jpg;";
             if (op.ShowDialog() == DialogResult.OK)
             {
                 obrazek.Image = new Bitmap(op.FileName);
             }
-            image = obrazek.Image;
-            
-            
+            image = obrazek.Image;           
         }
 
         private void Bar_Scroll(object sender, EventArgs e)
@@ -45,12 +41,8 @@ namespace jasnosc
             progress = Bar.Value;
         }     
         private void jasnosc_Click(object sender, EventArgs e)
-        {
-            
-            bw.RunWorkerAsync();
-            
-            
-
+        {            
+            bw.RunWorkerAsync();            
         }
 
         private void Zapis_Click(object sender, EventArgs e)
@@ -65,93 +57,36 @@ namespace jasnosc
 
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
-            double report, report2=0;
-            report = Math.Abs(100 / progress);
-            if (progress > 0)
-            {
-                for (int j = 0; j < progress; j++)
-                {
-                    if (bw.CancellationPending)
-                    {
-                        e.Cancel = true;
-                    }
-                    else
-                    {
-                        b = (float)j / 255.0f;
-                        ColorMatrix cm = new ColorMatrix(new float[][]
-                            {
-                    new float[] {1, 0, 0, 0, 0},
-                    new float[] {0, 1, 0, 0, 0},
-                    new float[] {0, 0, 1, 0, 0},
-                    new float[] {0, 0, 0, 1, 0},
-                    new float[] {b, b, b, 1, 1},
-                            });
-                        ImageAttributes attributes = new ImageAttributes();
-                        attributes.SetColorMatrix(cm);
-                        Point[] points =
-                            {
-                    new Point(0, 0),
-                    new Point(image.Width, 0),
-                    new Point(0, image.Height),
-                    };
-                        Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
-                        bm = new Bitmap(image.Width, image.Height);
-                        using (Graphics gr = Graphics.FromImage(bm))
-                        {
-                            gr.DrawImage(image, points, rect,
-                            GraphicsUnit.Pixel, attributes);
-                        }
-                        obrazek.Image = bm;
 
-                        report2 += report;
-                        bw.ReportProgress((int)report2);
+            b = (float)progress / 255.0f;
+            bm = new Bitmap(image);
+            double report2 = 0.1;
+            double report = 0.1;
+            for (int y = 0; y < bm.Height; y++)
+            {
+                if (bw.CancellationPending)
+                {
+                    e.Cancel = true;
+                }
+                else
+                {
+                    for (int x = 0; x < bm.Width; x++)
+                    {
+                        color = bm.GetPixel(x, y);
+
+                        color = ChangeColorBrightness(color, b);
+                        bm.SetPixel(x, y, color);
+                        
                     }
                 }
-            } else
-            {
-                for (int j = 0; j > progress; j--)
-                {
-                    if (bw.CancellationPending)
-                    {
-                        e.Cancel = true;
-                    }
-                    else
-                    {
-                        b = (float)j / 255.0f;
-                        ColorMatrix cm = new ColorMatrix(new float[][]
-                            {
-                    new float[] {1, 0, 0, 0, 0},
-                    new float[] {0, 1, 0, 0, 0},
-                    new float[] {0, 0, 1, 0, 0},
-                    new float[] {0, 0, 0, 1, 0},
-                    new float[] {b, b, b, 1, 1},
-                            });
-                        ImageAttributes attributes = new ImageAttributes();
-                        attributes.SetColorMatrix(cm);
-                        Point[] points =
-                            {
-                    new Point(0, 0),
-                    new Point(image.Width, 0),
-                    new Point(0, image.Height),
-                    };
-                        Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
-                        bm = new Bitmap(image.Width, image.Height);
-                        using (Graphics gr = Graphics.FromImage(bm))
-                        {
-                            gr.DrawImage(image, points, rect,
-                            GraphicsUnit.Pixel, attributes);
-                        }
-                        obrazek.Image = bm;
-
-                        report2 += report;
-                        bw.ReportProgress((int)report2);
-                    }
-                }
+                report2+= report;
+                bw.ReportProgress((int)report2);
             }
         }
+        
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {            
-             progressBar.Value = e.ProgressPercentage;           
+             progressBar.Value = e.ProgressPercentage;
         }
 
         private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -160,7 +95,30 @@ namespace jasnosc
         }
         private void anuluj_Click(object sender, EventArgs e)
         {
-            bw.CancelAsync();
+            bw.CancelAsync();        
+        }
+
+        private Color ChangeColorBrightness(Color color, float correctionFactor)
+        {
+            float red = (float)color.R;
+            float green = (float)color.G;
+            float blue = (float)color.B;
+
+            if (correctionFactor < 0)
+            {
+                correctionFactor = 1 + correctionFactor;
+                red *= correctionFactor;
+                green *= correctionFactor;
+                blue *= correctionFactor;
+            }
+            else
+            {
+                red = (255 - red) * correctionFactor + red;
+                green = (255 - green) * correctionFactor + green;
+                blue = (255 - blue) * correctionFactor + blue;
+            }
+
+            return Color.FromArgb(color.A, (int)red, (int)green, (int)blue);
         }
     }
 }

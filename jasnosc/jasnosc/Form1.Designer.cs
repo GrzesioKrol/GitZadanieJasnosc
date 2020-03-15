@@ -45,16 +45,16 @@
             // 
             this.obrazek.Location = new System.Drawing.Point(12, 12);
             this.obrazek.Name = "obrazek";
-            this.obrazek.Size = new System.Drawing.Size(727, 329);
+            this.obrazek.Size = new System.Drawing.Size(1000, 400);
             this.obrazek.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.obrazek.TabIndex = 0;
             this.obrazek.TabStop = false;
             // 
             // Wstaw
             // 
-            this.Wstaw.Location = new System.Drawing.Point(41, 347);
+            this.Wstaw.Location = new System.Drawing.Point(51, 446);
             this.Wstaw.Name = "Wstaw";
-            this.Wstaw.Size = new System.Drawing.Size(75, 45);
+            this.Wstaw.Size = new System.Drawing.Size(75, 51);
             this.Wstaw.TabIndex = 1;
             this.Wstaw.Text = "Wstaw";
             this.Wstaw.UseVisualStyleBackColor = true;
@@ -70,9 +70,9 @@
             // 
             // jasnosc
             // 
-            this.jasnosc.Location = new System.Drawing.Point(131, 347);
+            this.jasnosc.Location = new System.Drawing.Point(141, 446);
             this.jasnosc.Name = "jasnosc";
-            this.jasnosc.Size = new System.Drawing.Size(75, 45);
+            this.jasnosc.Size = new System.Drawing.Size(75, 51);
             this.jasnosc.TabIndex = 2;
             this.jasnosc.Text = "Jasność";
             this.jasnosc.UseVisualStyleBackColor = true;
@@ -81,7 +81,7 @@
             // Bar
             // 
             this.Bar.LargeChange = 50;
-            this.Bar.Location = new System.Drawing.Point(212, 347);
+            this.Bar.Location = new System.Drawing.Point(222, 446);
             this.Bar.Maximum = 250;
             this.Bar.Minimum = -250;
             this.Bar.Name = "Bar";
@@ -94,7 +94,7 @@
             // 
             this.Label.AutoSize = true;
             this.Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Label.Location = new System.Drawing.Point(719, 355);
+            this.Label.Location = new System.Drawing.Point(729, 454);
             this.Label.Name = "Label";
             this.Label.Size = new System.Drawing.Size(20, 24);
             this.Label.TabIndex = 4;
@@ -102,9 +102,9 @@
             // 
             // Zapis
             // 
-            this.Zapis.Location = new System.Drawing.Point(41, 398);
+            this.Zapis.Location = new System.Drawing.Point(51, 497);
             this.Zapis.Name = "Zapis";
-            this.Zapis.Size = new System.Drawing.Size(75, 40);
+            this.Zapis.Size = new System.Drawing.Size(75, 46);
             this.Zapis.TabIndex = 5;
             this.Zapis.Text = "Zapis";
             this.Zapis.UseVisualStyleBackColor = true;
@@ -112,16 +112,16 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(212, 398);
+            this.progressBar.Location = new System.Drawing.Point(222, 497);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(501, 23);
+            this.progressBar.Size = new System.Drawing.Size(501, 29);
             this.progressBar.TabIndex = 6;
             // 
             // anuluj
             // 
-            this.anuluj.Location = new System.Drawing.Point(131, 399);
+            this.anuluj.Location = new System.Drawing.Point(141, 498);
             this.anuluj.Name = "anuluj";
-            this.anuluj.Size = new System.Drawing.Size(75, 39);
+            this.anuluj.Size = new System.Drawing.Size(75, 45);
             this.anuluj.TabIndex = 7;
             this.anuluj.Text = "Anuluj";
             this.anuluj.UseVisualStyleBackColor = true;
@@ -131,7 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1073, 607);
             this.Controls.Add(this.anuluj);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.Zapis);

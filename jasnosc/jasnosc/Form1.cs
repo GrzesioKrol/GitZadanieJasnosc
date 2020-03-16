@@ -57,11 +57,11 @@ namespace jasnosc
 
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
-
             b = (float)progress / 255.0f;
             bm = new Bitmap(image);
             double report2 = 0.1;
-            double report = 0.1;
+            double report = Math.Abs(100.0 / bm.Height);
+            int stop = 0;
             for (int y = 0; y < bm.Height; y++)
             {
                 if (bw.CancellationPending)
@@ -73,14 +73,14 @@ namespace jasnosc
                     for (int x = 0; x < bm.Width; x++)
                     {
                         color = bm.GetPixel(x, y);
-
                         color = ChangeColorBrightness(color, b);
                         bm.SetPixel(x, y, color);
-                        
                     }
+                    obrazek.Image = bm;
+                    System.Threading.Thread.Sleep(15);
+                    report2 += report;
+                    bw.ReportProgress((int)report2);
                 }
-                report2+= report;
-                bw.ReportProgress((int)report2);
             }
         }
         
